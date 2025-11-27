@@ -5,3 +5,8 @@ Necesitaremos identificar el input que necesitamos y el output resultante,
 
 Más ejemplos, gafas que actuan como traductor en tiempo real y muestran el texto.
 
+Cuantas más funcionalidades mayor nota, mínimo hacer 3.
+
+El objetivo es que sepa reconocer correctamente y generalizar, es decir que funcionen en muchos contextos diferentes.
+
+Si decidimos que nuestro Input sea un vídeo en vez de imágenes (simular AR), obtendremos mayor nota.
