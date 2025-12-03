@@ -21,40 +21,37 @@ from audio.listener import AudioListener
 from audio.tts import TextToSpeech
 from video.player import VideoPlayer
 from game.logic import GameLogic
-
-
-BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
-audios_path = os.path.join(BASE_DIR, "resources", "sounds")
-videos_path = os.path.join(BASE_DIR, "resources", "videos")
-
+from config import VIDEOS_DIR
 
 def main():
     audio_queue = Queue()
     command_queue = Queue()
 
-    # Inicialización de modulos
+    # Inicializamos módulos
     listener = AudioListener(queue=audio_queue)
     tts = TextToSpeech()
-    player = VideoPlayer(video_path="resources/videos/demo.mp4")
+    video_file = os.path.join(VIDEOS_DIR, os.listdir(VIDEOS_DIR)[0])
+    player = VideoPlayer(video_path=video_file, skip_seconds=0.01)
     game = GameLogic(command_queue=command_queue)
 
-    # Hilo para audio
+    # Hilo de audio
     Thread(target=listener.run, daemon=True).start()
 
-    # Loop principal del juego
+    # Procesar y generar video anotado
+    output_video = player.process_video(output_path=os.path.join(VIDEOS_DIR, "video_annotated.mp4"))
+    print(f"Video anotado generado: {output_video}")
+
+    # Loop principal del video/juego
     for frame in player.iter_frames():
         detections = player.detect_objects(frame)
         game.update(detections)
 
-        # Procesar nuevas instrucciones de audio
         while not audio_queue.empty():
             comando = audio_queue.get()
             game.process_command(comando)
 
-        # Emitimos instrucciones TTS si corresponde
         if game.has_instruction():
             tts.say(game.get_instruction())
-
 
 if __name__ == "__main__":
     main()
