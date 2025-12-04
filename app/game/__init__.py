@@ -1,2 +1,2 @@
 from .detection import Detection
-from .logic import GameLogic
+from .clip_processor import CLIPProcessor

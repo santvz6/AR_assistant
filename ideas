@@ -1,0 +1,5 @@
+· Usuario > Asistente: "Frase" + "Objeto" && Imagen -> Accuracy + Threshold
+
+
+· Asistente > Usuario: "Categoría Dict" + "Objeto" && Imagen -> Accuracy + Threshold
+· Asistente > Usuario: Imagen Embedding + Word2Vec -> Top10 similarity

@@ -44,6 +44,8 @@ class VideoPlayer:
     def process_video(self, output_path="resources/videos/output.mp4"):
         """
         Procesa todo el video: detección + anotación + creación de nuevo video
+        
+        
         """
         annotated_frames = []
         for frame in self.iter_frames():

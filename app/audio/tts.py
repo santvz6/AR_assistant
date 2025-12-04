@@ -10,7 +10,7 @@ class TextToSpeech:
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
 
-    def say(self, texto, filename="respuesta.mp3"):
+    def say(self, texto, filename="answer.mp3"):
         path = os.path.join(self.output_dir, filename)
         tts = gTTS(texto, lang="es", tld="es")
         tts.save(path)

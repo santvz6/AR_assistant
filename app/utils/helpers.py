@@ -1,24 +1,18 @@
 # app/utils/helpers.py
 
-import os
-import time
-import cv2
+import re
 
 
-def get_video_frame_count_for_fps(video_path, fps):
-    cap = cv2.VideoCapture(video_path)
-    if not cap.isOpened():
-        raise Exception("No se pudo abrir el video")
+STOPWORDS = {
+    "el", "la", "los", "las", "un", "una", "unos", "unas",
+    "de", "del", "que", "qué", "es", "son", "en", "por",
+    "para", "con", "se", "mi", "su", "lo", "a", "y", "o", "ha", "hay"
+}
 
-   
-    original_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-    original_fps = cap.get(cv2.CAP_PROP_FPS)
-    cap.release()
-
-    # Duración real del video
-    duration = original_frames / original_fps
-
-    # Cantidad de frames para el FPS deseado
-    target_frames = int(duration * fps)
-
-    return target_frames
+def clean_text(text: str) -> str:
+    text = text.lower()
+    text = re.sub(r"[^a-záéíóúüñ0-9\s]", "", text)
+    text = re.sub(r"\s+", " ", text)
+    words = [word for word in text.split() if word not in STOPWORDS]
+    cleaned = " ".join(words).strip()
+    return cleaned
