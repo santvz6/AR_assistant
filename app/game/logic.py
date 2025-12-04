@@ -5,7 +5,9 @@ class GameLogic:
         self.command_queue = command_queue
         self.current_instruction = None
 
-    def update(self, detections):
+        self.possible_frames = []
+
+    def update(self, detections, frame):
         # Aquí se pueden procesar detecciones y actualizar el estado del juego
         pass
 
