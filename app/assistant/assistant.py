@@ -20,7 +20,7 @@ class ARAssistant:
         logger.debug(f"video_file: {video_file}")
         self.video = VideoManager(
             video_path=os.path.join(ENVIRONMENT_DIR, video_file), 
-            skip_seconds=0.01)
+            sample_percentage=100)
         
         self.user_init = UserInitHandler()
         self.audio = AudioManager()

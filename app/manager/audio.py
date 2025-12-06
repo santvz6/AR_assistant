@@ -12,7 +12,9 @@ class AudioManager:
         self.tts = TextToSpeech(output_dir)
 
     def listen(self, audio_path):
+        """Utiliza Whisper para transcribir un audio a texto."""
         return self.model.transcribe(audio_path)["text"]
 
     def speak(self, text: str, filename: str):
+        """Utiliza TTS para transcribir un texto a audio."""
         self.tts._speak(text=text, filename=filename)

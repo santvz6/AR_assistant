@@ -14,6 +14,7 @@ class CLIPProcessor:
 
 
     def match(self, image_path, text_list):
+        """Compara una imagen con un texto y devuelve una lista de tuplas (texto, probabilidad)."""
         image = self.preprocess(Image.open(image_path)).unsqueeze(0).to(DEVICE)
         texts = clip.tokenize(text_list).to(DEVICE)
 
