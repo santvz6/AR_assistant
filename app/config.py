@@ -16,7 +16,11 @@ ENGLISH_QUESTIONS_DIR = os.path.join(AUDIOS_DIR, "questions", "english")
 
 VIDEO_FPS = 60
 DEVICE = "cuda" if __import__("torch").cuda.is_available() else "cpu"
-SEED = 25452
+SEED = 6525243253
+
+# Bottle: 6524652
+# Mouse: 65252
+# Book: 6525243253
 
 # Características
 OBJECT_CLUES = {

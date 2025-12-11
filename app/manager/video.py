@@ -38,27 +38,18 @@ class VideoManager:
         """
         return self.detector.detect(frame)
 
-    def __annotate_frame(self, frame, detections, text_scale=2):
+    def __annotate_frame(self, detections):
         """
-        Dibuja bounding boxes y etiquetas sobre el frame.
+        Usa el método nativo de YOLO para dibujar las cajas y etiquetas.
         """
-        frame_img = Image.fromarray(frame)
-        draw = ImageDraw.Draw(frame_img)
-        for box, cls, score in zip(detections.boxes.xyxy, detections.boxes.cls, detections.boxes.conf):
-            x1, y1, x2, y2 = map(int, box)
-            draw.rectangle([x1, y1, x2, y2], outline="red", width=3)    
-            text_img = Image.new("RGBA", (100, 30), (0, 0, 0, 0))
-            ImageDraw.Draw(text_img).text(xy=(0, 0), text=f"{detections.names[int(cls)]} {score:.2f}", fill="yellow")
-            text_img = text_img.resize((text_img.width * text_scale, text_img.height * text_scale), Image.NEAREST)
-            frame_img.paste(text_img, (x1, y1 - text_img.height), text_img)
-        return np.array(frame_img)
+        return detections.plot()
 
 
-    def __save_annotated_frame(self, frame, detections, filename="detected_frame.png"):
+    def __save_annotated_frame(self, detections, filename="detected_frame.png"):
         """
         Utiliza __anotate_frame() y guarda la imagen.
         """
-        annotated = self.__annotate_frame(frame, detections)
+        annotated = self.__annotate_frame(detections)
         img = Image.fromarray(annotated)
         self.detected_frame_path = os.path.join(IMAGES_DIR, filename)
         img.save(self.detected_frame_path)
@@ -113,7 +104,7 @@ class VideoManager:
                     self.detected_object_names.add(detections.names[int(cls)])
 
             # Dibujo de boxes sobre el frame
-            frame_annotated = self.__annotate_frame(frame, detections)
+            frame_annotated = self.__annotate_frame(detections)
             annotated_frames.append(frame_annotated)
 
             # Guardamos Frames con Objetos y Sus Objetos
@@ -139,5 +130,5 @@ class VideoManager:
         
 
         # Guardamos las imagenes del Frame y del Objeto
-        self.__save_annotated_frame(target_frame, target_dets)
+        self.__save_annotated_frame(target_dets)
         self.__save_select_detection(target_frame, target_dets)
