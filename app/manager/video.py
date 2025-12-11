@@ -74,8 +74,11 @@ class VideoManager:
 
         weights = confs / confs.sum()
         idx = random.choices(range(len(boxes)), weights=weights, k=1)[0]
+
+        self.detected_object_name = detections.names[int(classes[idx])]
+
         logger.debug(f"VideoManager: process_video(): Selected Object -> "
-                     f"Class: {detections.names[int(classes[idx])]}, Confidence: {confs[idx]:.2f}")
+                     f"Class: {self.detected_object_name}, Confidence: {confs[idx]:.2f}")
 
         x1, y1, x2, y2 = map(int, boxes[idx])
         h, w, _ = frame.shape
@@ -97,9 +100,17 @@ class VideoManager:
         logger.debug("VideoManager: process_video(): processing_video...")
         annotated_frames = []
         dets_frames, dets = [], []
+
+        self.detected_object_names = set()
+
         for frame in self.__iter_frames():
             # Detección de objetos
             detections = self.__detect_objects(frame)
+
+            # Recorremos las detecciones del frame y añadir la etiqueta al conjunto
+            if detections:
+                for cls in detections.boxes.cls:
+                    self.detected_object_names.add(detections.names[int(cls)])
 
             # Dibujo de boxes sobre el frame
             frame_annotated = self.__annotate_frame(frame, detections)
@@ -109,6 +120,7 @@ class VideoManager:
             if detections:
                 dets_frames.append(frame)
                 dets.append(detections)
+
 
         # Recreamos el vídeo con las imagenes creadas
         out_clip = ImageSequenceClip(annotated_frames, fps=self.video_clip.fps)

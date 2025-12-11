@@ -16,7 +16,7 @@ ENGLISH_QUESTIONS_DIR = os.path.join(AUDIOS_DIR, "questions", "english")
 
 VIDEO_FPS = 60
 DEVICE = "cuda" if __import__("torch").cuda.is_available() else "cpu"
-SEED = 9828428534053452
+SEED = 25452
 
 # Características
 OBJECT_CLUES = {
@@ -33,7 +33,9 @@ OBJECT_CLUES = {
         "animal", "fruta", "vehículo", "mueble", "electrónico",
         "ropa", "herramienta", "instrumento musical", "utensilio de cocina",
         "juguete", "deporte", "libro", "planta", "accesorio",
-        "edificio", "transporte", "bebida", "comida", "material", "decoración"]
+        "edificio", "transporte", "bebida", "comida", "material", "decoración"],
+
+    "objects": set(["sin objetos"]),
 }
 
 
@@ -42,7 +44,7 @@ GAME_EXPLANATION = """
 Primero, vamos a escanear los alrededores para identificar varios objetos y elementos en el escenario. 
 Tu objetivo es identificar correctamente el objeto principal que hemos detectado usando nuestro sistema de visión.
 
-Durante el juego, podrás hacer preguntas sobre lo que ves en el video, y yo te responderé según la información 
+Durante el juego, podrás hacer dos preguntas del estilo "Es circular o cuadrado" sobre lo que ves en el video, y yo te responderé según la información 
 del objeto que hemos seleccionado. Cada cierto tiempo, te daré pistas para ayudarte a encontrar el objeto correcto. 
 Las pistas pueden referirse al color, tamaño o categoría del objeto.
 

@@ -2,7 +2,7 @@
 
 import os
 import random
-import logging
+from googletrans import Translator
 
 from .user_init import UserInitHandler
 from .qna_engine import QnAEngine
@@ -26,6 +26,8 @@ class ARAssistant:
         self.audio = AudioManager()
         self.qna = QnAEngine()
 
+        self.translator = Translator()
+
     def __call__(self):
         # pipline
         if not self.user_init.wait_for_init():
@@ -33,6 +35,8 @@ class ARAssistant:
         self.audio.speak(text=GAME_EXPLANATION, filename="explain_game.mp3")
         self.video.process_video(output_path=os.path.join(ENVIRONMENT_DIR, "processed_video.mp4"))
         self.qna.start_loop(
-            detected_object_path=self.video.detected_object_path,
-            detected_frame_path=self.video.detected_frame_path
+            detected_object_path=self.video.detected_object_path,   
+            detected_object_name=self.translator.translate(self.video.detected_object_name, src="en", dest="es").text,
+            detected_object_names=self.translator.translate(", ".join(self.video.detected_object_names), src="en", dest="es").text,
+            detected_object_names_len=len(self.video.detected_object_names)
         )
