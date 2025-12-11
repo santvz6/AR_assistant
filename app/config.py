@@ -9,11 +9,14 @@ ENVIRONMENT_DIR = os.path.join(VIDEOS_DIR, "environment")
 
 AUDIOS_DIR = os.path.join(RESOURCES_DIR, "audios")
 ANSWERS_DIR = os.path.join(AUDIOS_DIR, "answers")
-QUESTIONS_DIR = os.path.join(AUDIOS_DIR, "questions")
+
+SPANISH_QUESTIONS_DIR = os.path.join(AUDIOS_DIR, "questions", "spanish")
+ENGLISH_QUESTIONS_DIR = os.path.join(AUDIOS_DIR, "questions", "english")
+
 
 VIDEO_FPS = 60
 DEVICE = "cuda" if __import__("torch").cuda.is_available() else "cpu"
-SEED = 1234
+SEED = 9828428534053452
 
 # Características
 OBJECT_CLUES = {

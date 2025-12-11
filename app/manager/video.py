@@ -64,7 +64,7 @@ class VideoManager:
         img.save(self.detected_frame_path)
 
 
-    def __save_select_detection(self, frame, detections, margin=20, filename="detected_object.png"):
+    def __save_select_detection(self, frame, detections, margin=-10, filename="detected_object.png"):
         """
         Guarda y selecciona una detección de forma aleatoria utilizando como pesos la confianza. 
         """
