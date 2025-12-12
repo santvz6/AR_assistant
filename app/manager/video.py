@@ -2,10 +2,9 @@
 
 import os
 import random
-import numpy as np
 
 from moviepy import VideoFileClip, ImageSequenceClip
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 
 from models import YOLODetector
 from config import VIDEO_FPS, IMAGES_DIR

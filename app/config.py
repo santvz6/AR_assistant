@@ -14,13 +14,10 @@ SPANISH_QUESTIONS_DIR = os.path.join(AUDIOS_DIR, "questions", "spanish")
 ENGLISH_QUESTIONS_DIR = os.path.join(AUDIOS_DIR, "questions", "english")
 
 
-VIDEO_FPS = 60
+VIDEO_FPS = 30
 DEVICE = "cuda" if __import__("torch").cuda.is_available() else "cpu"
-SEED = 6525243253
+SEED = 12345012
 
-# Bottle: 6524652
-# Mouse: 65252
-# Book: 6525243253
 
 # Características
 OBJECT_CLUES = {
@@ -33,13 +30,13 @@ OBJECT_CLUES = {
         "minúsculo", "muy pequeño", "pequeño", 
         "mediano", "grande", "muy grande"],
     
+    "objects": set(["sin objetos"]),
+
     "categoria": [
         "animal", "fruta", "vehículo", "mueble", "electrónico",
         "ropa", "herramienta", "instrumento musical", "utensilio de cocina",
         "juguete", "deporte", "libro", "planta", "accesorio",
         "edificio", "transporte", "bebida", "comida", "material", "decoración"],
-
-    "objects": set(["sin objetos"]),
 }
 
 

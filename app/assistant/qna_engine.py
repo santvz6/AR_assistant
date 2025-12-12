@@ -77,7 +77,7 @@ class QnAEngine:
         # En unas gafas de realidad virtual sería un bucle cte
         while question_idx < len(questions_files):
             user_text = process_question() 
-            if detected_object_name in user_text:
+            if detected_object_name in user_text.split():
                 logger.debug(f"QnAEngine: while question_idx < len(questions_files): success {detected_object_name}")
                 self.audio.speak(f"¡Has acertado! El objeto era {detected_object_name}", filename="success.mp3")
                 break
