@@ -29,7 +29,7 @@ Aquí puedes ver cómo AR Assistant identifica y resalta los objetos presentes e
 ---
 
 ### Objeto Secreto
-El sistema selecciona un objeto al azar como “objeto secreto”, que el jugador debe descubrir mediante pistas y preguntas.
+El sistema selecciona un objeto al azar como "objeto secreto", que el jugador debe descubrir mediante pistas y preguntas.
 
 <div align="center">
     <img src="app/resources/images/detected_object.png" width="200" alt="Objeto Secreto">
