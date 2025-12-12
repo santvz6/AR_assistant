@@ -13,7 +13,3 @@ __pycache__/
 
 # Archivos temporales de Python
 *.log
-
-# Archivos de ejecución
-app/resources/audios/answers/*.mp3
-app/resources/images/*
