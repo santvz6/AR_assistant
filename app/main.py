@@ -16,7 +16,6 @@
 
 from assistant import ARAssistant
 
-
 if __name__ == "__main__":
     assistant = ARAssistant()
     assistant()
